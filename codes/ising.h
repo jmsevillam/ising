@@ -23,8 +23,8 @@ public:
   double Magne();
   double Susce();
   double Get_Temp(){return kbT;};
-  void Temp(double T){kbT=T;};
-  void Field(double Fie){H=Fie;};
+  void set_Temp(double T){kbT=T;};
+  void set_Field(double Fie){H=Fie;};
   void print();
 };
 
@@ -33,11 +33,10 @@ void ising::get_mem(matrix & m,int N){
   for(int i=0;i<N;i++){
     m[i].resize(N);
     for(int j=0;j<N;j++){
-      m[i][j]=1;//2*(rand() % 2)-1;
+      m[i][j]=distribution(generator)>0.5 ? 1 : -1;
     }
   }
 }
-
 void ising::Initial_Conditions(int size, double Temp) {
   srand ( time(NULL) );
   N=size;
